@@ -1,0 +1,11 @@
+Model Information:
+* title:	Maceta_01
+* source:	https://sketchfab.com/3d-models/maceta-01-493c3852e0304a22918e237be3b62637
+* author:	juanmatteo (https://sketchfab.com/juanmatteo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Maceta_01" (https://sketchfab.com/3d-models/maceta-01-493c3852e0304a22918e237be3b62637) by juanmatteo (https://sketchfab.com/juanmatteo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

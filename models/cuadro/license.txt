@@ -1,0 +1,11 @@
+Model Information:
+* title:	cuadro
+* source:	https://sketchfab.com/3d-models/cuadro-e37b056416224b6bb80126859524dc1e
+* author:	IspI (https://sketchfab.com/IspI)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "cuadro" (https://sketchfab.com/3d-models/cuadro-e37b056416224b6bb80126859524dc1e) by IspI (https://sketchfab.com/IspI) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
