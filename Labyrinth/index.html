@@ -28,11 +28,24 @@
         </div>
     </div>
 
-    <!-- PANTALLA DE INICIO -->
+    <!-- PANTALLA DE INICIO REESTRUCTURADA -->
     <div id="start-screen" class="screen-overlay" style="display: none;">
-        <div class="text-center">
+        <div class="start-panel">
             <h1 class="main-title">LABERINTO 3D</h1>
-            <p class="subtitle">Encuentra el PinPad oculto y descubre el código.</p>
+            
+            <div class="game-instructions">
+                <h3>OBJETIVO</h3>
+                <p>Estás atrapado en un laberinto cambiante. Encuentra el PinPad oculto y busca las pistas esparcidas en el mapa para descubrir el código secreto de 4 dígitos. ¡Solo así se abrirá la salida!</p>
+                
+                <h3>CONTROLES</h3>
+                <ul class="controls-list">
+                    <li><span>W / S</span> Caminar</li>
+                    <li><span>A / D</span> Girar cámara</li>
+                    <li><span>Shift</span> Correr</li>
+                    <li><span>E</span> Interactuar</li>
+                </ul>
+            </div>
+
             <button id="start-btn" class="glow-btn">INICIAR JUEGO</button>
         </div>
     </div>
@@ -49,15 +62,15 @@
     <!-- CONTENEDOR 3D -->
     <div id="game-container"></div>
     
-<!-- PROMPT DE INTERACCIÓN -->
+    <!-- PROMPT DE INTERACCIÓN -->
     <div id="interact-prompt" style="display: none;">[ E ] PARA INTERACTUAR</div>
 
-    <!-- ALERTA DE PUERTA BLOQUEADA (NUEVO) -->
+    <!-- ALERTA DE PUERTA BLOQUEADA -->
     <div id="door-alert" style="display: none; position: absolute; top: 20%; left: 50%; transform: translateX(-50%); background-color: rgba(255, 42, 95, 0.9); color: white; padding: 15px 30px; border-radius: 8px; font-weight: bold; border: 2px solid #ff2a5f; z-index: 100; text-shadow: 1px 1px 2px #000; letter-spacing: 1px;">
         La puerta está bloqueada. Introduce el código en el PinPad.
     </div>
 
-<!-- UI DEL PINPAD (NUEVO DISEÑO) -->
+    <!-- UI DEL PINPAD -->
     <div id="pinpad-ui" class="screen-overlay" style="display: none;">
         <div class="pinpad-container">
             <h3 class="neon-text" style="font-size: 1.2rem; margin-top: 0;">SISTEMA DE SEGURIDAD</h3>
@@ -81,18 +94,15 @@
         </div>
     </div>
 
-    <!-- UI INFERIOR -->
-    <div id="ui-container">
-        <div class="ui-header">LABERINTO DE DÍA 3D</div>
-        <div class="ui-footer">
-            <div class="ui-info">David Adolfo Ramírez Vera | Ingeniería en Sistemas Computacionales | IT Pachuca</div>
-            <div class="ui-controls">
-                <span class="key-hint">W / S: Adelante/Atrás</span>
-                <span class="key-hint">A / D: Girar</span>
-                <span class="key-hint">Shift: Correr</span>
-                <span class="key-hint">E: Interactuar</span>
-                <span class="key-hint">M: Vista Aérea</span>
-            </div>
+    <!-- WIDGET DE AUTOR DESLIZANTE -->
+    <div id="author-panel" class="author-panel">
+        <div class="author-handle">
+            <span>ℹ Info</span>
+        </div>
+        <div class="author-content">
+            <p><strong>Desarrollo:</strong> David Adolfo Ramírez Vera</p>
+            <p><strong>Carrera:</strong> Ing. en Sistemas Computacionales</p>
+            <p><strong>Institución:</strong> Instituto Tecnológico de Pachuca</p>
         </div>
     </div>
 

@@ -47,7 +47,6 @@ export function construirMundo(scene) {
     for(let i = 0; i < 4; i++) { 
         mapState.codigoSecreto.push(glifosPosibles.splice(Math.floor(Math.random() * glifosPosibles.length), 1)[0]); 
     }
-    console.log("🔑 PIN DE ESTA PARTIDA:", mapState.codigoSecreto.join(""));
 
     const floorTex = texLoader.load('assets/Alfombra.jpg'); 
     floorTex.wrapS = floorTex.wrapT = THREE.RepeatWrapping; floorTex.repeat.set(40, 40); 
@@ -56,18 +55,17 @@ export function construirMundo(scene) {
 
     const tileSize = 250; const geomMuro = new THREE.BoxGeometry(tileSize, 350, tileSize);
 
-    // --- 4 MAPAS DISTINTOS (AHORA CON MUCHOS MÁS PORTALES 9) ---
     const mapa1 = [ 
         [1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1],
         [1, 8, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 1],
         [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 9, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 9, 0, 0, 1],
         [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 9, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 0, 1, 9, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
         [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1],
         [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
@@ -83,11 +81,11 @@ export function construirMundo(scene) {
         [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 1, 9, 0, 0, 1, 0, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 0, 0, 0, 1, 0, 1, 9, 0, 0, 1, 0, 0, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 8, 1],
         [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-        [1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1], // Nuevos portales aleatorios
+        [1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 1],
         [1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 9, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1]
@@ -99,11 +97,11 @@ export function construirMundo(scene) {
         [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
         [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1],
-        [1, 9, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 9, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
         [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 9, 1], // Nuevo portal aleatorio
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 9, 1],
         [1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
         [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
@@ -117,11 +115,11 @@ export function construirMundo(scene) {
         [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 9, 0, 0, 1, 0, 0, 0, 1], // Nuevo portal aleatorio
+        [1, 0, 0, 0, 1, 0, 0, 9, 0, 0, 1, 0, 0, 0, 1],
         [1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1],
-        [1, 9, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 9, 1], // Nuevos portales aleatorios
+        [1, 9, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 9, 1],
         [1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 9, 1],
         [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
@@ -256,6 +254,30 @@ export function construirMundo(scene) {
                 
                 mapState.safeSpots.push(new THREE.Vector3(posX, 0, posZ));
                 paredesDisponibles.push({x: posX, z: posZ, rotY: 0, isFloor: true});
+
+                // --- LÓGICA RESTAURADA PARA LAS MACETAS Y CACTUS ---
+                let offsetX = 0; let offsetZ = 0; let formsL = false; const pushAmount = 75; 
+
+                const N = mapa[f-1] ? mapa[f-1][c] : 1;
+                const S = mapa[f+1] ? mapa[f+1][c] : 1;
+                const W = mapa[f][c-1] !== undefined ? mapa[f][c-1] : 1;
+                const E = mapa[f][c+1] !== undefined ? mapa[f][c+1] : 1;
+                
+                if (N === 1 && W === 1 && S !== 1 && E !== 1) { formsL = true; offsetZ = -pushAmount; offsetX = -pushAmount; } 
+                else if (N === 1 && E === 1 && S !== 1 && W !== 1) { formsL = true; offsetZ = -pushAmount; offsetX = pushAmount; }  
+                else if (S === 1 && W === 1 && N !== 1 && E !== 1) { formsL = true; offsetZ = pushAmount; offsetX = -pushAmount; }  
+                else if (S === 1 && E === 1 && N !== 1 && W !== 1) { formsL = true; offsetZ = pushAmount; offsetX = pushAmount; }   
+
+                const isSpawn = Math.abs(posX - mapState.spawnPosition.x) < 10 && Math.abs(posZ - mapState.spawnPosition.z) < 10;
+
+                if (formsL && !isSpawn && Math.random() > 0.4) {
+                    const esCactus = Math.random() > 0.5;
+                    const rutaModelo = esCactus ? 'models/Cactus_maceta.fbx' : 'models/Maceta.fbx';
+                    
+                    cargarPropEscena(rutaModelo, {
+                        escala: 1.0, x: posX + offsetX, z: posZ + offsetZ, alignGround: true 
+                    });
+                }
             }
         }
     }

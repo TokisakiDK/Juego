@@ -7,9 +7,6 @@ const keys = { w: false, a: false, s: false, d: false, shift: false };
 const rotationSpeed = 2.5; 
 const camRaycaster = new THREE.Raycaster();
 let portalCooldown = 0; 
-let isAerialView = false; 
-
-// Nuevo: Temporizador para los pasos
 let stepTimer = 0;
 
 export function initPlayer(scene, spawnPosition) {
@@ -17,7 +14,6 @@ export function initPlayer(scene, spawnPosition) {
         const k = e.key.toLowerCase(); 
         if(keys.hasOwnProperty(k)) keys[k] = true; 
         if(e.key === 'Shift') keys.shift = true; 
-        if(k === 'm') isAerialView = !isAerialView; 
     });
     
     document.addEventListener('keyup', (e) => { 
@@ -82,29 +78,9 @@ export function updatePlayer(delta, camera, mapData) {
         if (o.boundingBox && pBoxZ.intersectsBox(o.boundingBox)) { character.position.z = orig.z; break; }
     }
 
-    // --- LÓGICA DE SONIDO DE PASOS (FOOTSTEPS) ---
-    if (speed !== 0 && !isAerialView && portalCooldown <= 0) {
-        stepTimer -= delta;
-        if (stepTimer <= 0) {
-            if (mapData.sfxStep && mapData.sfxStep.buffer) {
-                if (mapData.sfxStep.isPlaying) mapData.sfxStep.stop();
-                
-                // Si está corriendo, el sonido se reproduce un poco más rápido
-                mapData.sfxStep.setPlaybackRate(keys.shift ? 1.3 : 1.0);
-                mapData.sfxStep.play();
-            }
-            // Resetear el temporizador (más corto si corre, más largo si camina)
-            stepTimer = keys.shift ? 0.35 : 0.6;
-        }
-    } else {
-        stepTimer = 0; // Para que suene apenas empiece a caminar de nuevo
-    }
-
-    // --- LÓGICAS DE PORTALES ---
     if (portalCooldown > 0) {
         portalCooldown -= delta;
     } else {
-        // 1. Portales Conectados (Azules) - A -> B
         if (mapData.linkedPortals.length === 2) {
             const p1 = mapData.linkedPortals[0];
             const p2 = mapData.linkedPortals[1];
@@ -126,7 +102,6 @@ export function updatePlayer(delta, camera, mapData) {
             }
         }
 
-        // 2. Portales Aleatorios (Rosas)
         if (portalCooldown <= 0 && mapData.randomPortals.length > 0) {
             for (let i = 0; i < mapData.randomPortals.length; i++) {
                 if (character.position.distanceTo(mapData.randomPortals[i]) < 120) {
@@ -159,14 +134,7 @@ export function updatePlayer(delta, camera, mapData) {
 
     mapData.portalsArray.forEach(p => p.lookAt(camera.position));
     
-    // --- LÓGICA DE CÁMARA ---
-    if (isAerialView) {
-        const aerialPos = new THREE.Vector3(character.position.x, 2000, character.position.z);
-        camera.position.lerp(aerialPos, 0.1); 
-        camera.lookAt(character.position.x, 0, character.position.z); 
-        return; 
-    }
-
+    // Cámara Normal (Sigue a Mike)
     const playerHead = character.position.clone().add(new THREE.Vector3(0, 150, 0));
     const zIdeal = keys.s ? -120 : -320; 
     const yIdeal = keys.s ? 160 : 180;

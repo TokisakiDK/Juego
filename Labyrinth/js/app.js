@@ -12,7 +12,7 @@ let alertTimeout;
 const clock = new THREE.Clock();
 
 let currentPin = "";
-let sfxPin, sfxError; // Variables globales para los sonidos de la UI
+let sfxPin, sfxError, sfxSuccess; // Variables para sonidos UI
 
 init();
 
@@ -60,7 +60,7 @@ function init() {
             if (numero !== 'C' && numero !== 'E' && currentPin.length < 4) {
                 currentPin += numero;
                 actualizarPantallaPinpad();
-                reproducirSonido(sfxPin); // Sonido al teclear
+                reproducirSonido(sfxPin);
             }
         });
     });
@@ -68,7 +68,7 @@ function init() {
     document.getElementById('pinpad-clear').addEventListener('click', () => {
         currentPin = "";
         actualizarPantallaPinpad();
-        reproducirSonido(sfxPin); // Sonido al borrar
+        reproducirSonido(sfxPin); 
         const msg = document.getElementById('pinpad-msg');
         msg.innerText = "INTRODUCE EL PIN";
         msg.style.color = "#a0a0b0";
@@ -81,7 +81,9 @@ function init() {
         if (currentPin === correcta) {
             msg.innerText = "CÓDIGO ACEPTADO";
             msg.style.color = "#4ade80"; 
-            reproducirSonido(sfxPin);
+            
+            // Sonido de éxito al desbloquear
+            reproducirSonido(sfxSuccess);
             
             setTimeout(() => {
                 cerrarPinpad();
@@ -98,7 +100,7 @@ function init() {
             msg.style.color = "#ff2a5f"; 
             currentPin = ""; 
             actualizarPantallaPinpad();
-            reproducirSonido(sfxError); // ¡Sonido de error de capa 8!
+            reproducirSonido(sfxError);
         }
     });
 
@@ -114,7 +116,6 @@ function init() {
     renderer.toneMappingExposure = 1.0;
     document.getElementById('game-container').appendChild(renderer.domElement);
 
-    // --- NUEVAS RUTAS DE CIELOS ---
     const catalogoCielos = [
         'assets/sky/sky_1.exr',
         'assets/sky/sky_2.exr',
@@ -135,7 +136,6 @@ function init() {
     sun.position.set(500, 1000, 250); sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048); scene.add(sun);
 
-    // --- NUEVAS RUTAS DE AUDIO ---
     const listener = new THREE.AudioListener(); 
     camera.add(listener);
 
@@ -156,26 +156,22 @@ function init() {
         bgMusic.setVolume(0.4); 
     });
 
-    // Cargar SFX
     const portalSoundB = new THREE.Audio(listener);
     const portalSoundP = new THREE.Audio(listener);
     sfxPin = new THREE.Audio(listener);
     sfxError = new THREE.Audio(listener);
-    const sfxStep = new THREE.Audio(listener);
+    sfxSuccess = new THREE.Audio(listener); // Audio de éxito nuevo
 
     audioLoader.load('assets/affects/portal_b.wav', (b) => { portalSoundB.setBuffer(b); portalSoundB.setVolume(0.8); });
     audioLoader.load('assets/affects/portal_p.wav', (b) => { portalSoundP.setBuffer(b); portalSoundP.setVolume(0.8); });
     audioLoader.load('assets/affects/pin.wav', (b) => { sfxPin.setBuffer(b); sfxPin.setVolume(1.0); });
     audioLoader.load('assets/affects/error.wav', (b) => { sfxError.setBuffer(b); sfxError.setVolume(1.0); });
-    
-    // El sonido de los pasos suele ser repetitivo, bajamos un poco el volumen
-    audioLoader.load('assets/affects/step.wav', (b) => { sfxStep.setBuffer(b); sfxStep.setVolume(0.5); });
+    audioLoader.load('assets/affects/pinpad.wav', (b) => { sfxSuccess.setBuffer(b); sfxSuccess.setVolume(1.0); });
 
     mapData = construirMundo(scene);
     
     mapData.sfxPortalB = portalSoundB;
     mapData.sfxPortalP = portalSoundP;
-    mapData.sfxStep = sfxStep; // Lo inyectamos para que Player.js lo use
 
     initPlayer(scene, mapData.spawnPosition);
 
